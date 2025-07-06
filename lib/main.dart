@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:home_decor/src/features/screens/forgot_password_screen.dart';
+import 'package:home_decor/src/features/screens/home_screen.dart';
+import 'package:home_decor/src/features/screens/login_screen.dart';
 import 'package:home_decor/src/features/screens/onboarding_screen.dart';
+import 'package:home_decor/src/features/screens/set_password_screen.dart';
+import 'package:home_decor/src/features/screens/signup_screen.dart';
 
 import 'l10n/l10n.dart';
 
@@ -17,16 +22,15 @@ class MyApp extends StatelessWidget {
       localeListResolutionCallback: L10n.localeListResolutionCallback,
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
-      home: OnboardingScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const OnboardingScreen(),
+        '/login': (context) => LoginScreen(),
+        '/signup': (context) => SignUpScreen(),
+        '/ForgotPassword': (context) => ForgotPasswordScreen(),
+        '/SetPassword': (context) => SetPasswordScreen(),
+        '/Homepage': (context) => const HomeScreen(),
+      },
     );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('Home Decor')));
   }
 }
