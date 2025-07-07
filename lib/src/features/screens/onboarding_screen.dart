@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:home_decor/src/features/screens/login_screen.dart';
+import 'package:home_decor/src/features/screens/auth/login_screen.dart';
 import 'package:home_decor/src/features/widgets/onboarding_page_content.dart';
 
 class OnboardingScreen extends StatefulWidget {

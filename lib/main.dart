@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:home_decor/src/features/screens/forgot_password_screen.dart';
+import 'package:home_decor/src/features/screens/auth/forgot_password_screen.dart';
+import 'package:home_decor/src/features/screens/auth/login_screen.dart';
 import 'package:home_decor/src/features/screens/home_screen.dart';
-import 'package:home_decor/src/features/screens/login_screen.dart';
 import 'package:home_decor/src/features/screens/onboarding_screen.dart';
-import 'package:home_decor/src/features/screens/set_password_screen.dart';
-import 'package:home_decor/src/features/screens/signup_screen.dart';
+import 'package:home_decor/src/features/screens/auth/set_password_screen.dart';
+import 'package:home_decor/src/features/screens/auth/signup_screen.dart';
 
 import 'l10n/l10n.dart';
 
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         '/CreateAccountScreen': (context) => CreateAccountScreen(),
         '/ForgotPassword': (context) => ForgotPasswordScreen(),
         '/SetPassword': (context) => SetPasswordScreen(),
-        '/Homepage': (context) => const HomeScreen(),
+        '/HomeScreen': (context) => HomeScreen(),
       },
     );
   }

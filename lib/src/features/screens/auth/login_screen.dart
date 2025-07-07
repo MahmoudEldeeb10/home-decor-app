@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Handle login
+                      Navigator.pushNamed(context, '/HomeScreen');
                     }
                   },
                   style: ElevatedButton.styleFrom(
