@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
+/// A customizable text form field with a label, hint text, and optional password toggle.
 class CustomTextformfield extends StatefulWidget {
-  final String? hintText;
+  final String hintText;
   final TextEditingController controller;
   final bool isPassword;
   final String upperlabel;
+  final Color? fillColor;
+  final Color? borderColor;
+  final TextStyle? labelStyle;
+  final TextStyle? hintStyle;
+  final String? Function(String?)? validator;
 
   const CustomTextformfield({
     super.key,
-
     required this.hintText,
     required this.controller,
     this.isPassword = false,
     required this.upperlabel,
+    this.fillColor,
+    this.borderColor,
+    this.labelStyle,
+    this.hintStyle,
+    this.validator,
   });
 
   @override
@@ -36,29 +45,30 @@ class _CustomTextformfieldState extends State<CustomTextformfield> {
       children: [
         Text(
           widget.upperlabel,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: Colors.black87,
-          ),
+          style:
+              widget.labelStyle ??
+              const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         TextFormField(
-          style: const TextStyle(color: Colors.black),
           controller: widget.controller,
-          obscureText: _isObscured,
+          obscureText: widget.isPassword ? _isObscured : false,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 15,
+              vertical: 15,
+              horizontal: 20,
             ),
             filled: true,
-            fillColor: Color(0xFFFAF0E6),
+            fillColor: widget.fillColor ?? const Color(0xFFFAF0E6),
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(
                       _isObscured ? Icons.visibility_off : Icons.visibility,
-                      color: Color(0xFFCC7861),
+                      color: const Color(0xFFCC7861),
                     ),
                     onPressed: () {
                       setState(() {
@@ -67,35 +77,41 @@ class _CustomTextformfieldState extends State<CustomTextformfield> {
                     },
                   )
                 : null,
-
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 0, color: Color(0xFFF4B5A4)),
-              borderRadius: BorderRadius.all(
-                Radius.circular(100),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 0,
+                color: widget.borderColor ?? const Color(0xFFF4B5A4),
               ),
+              borderRadius: BorderRadius.circular(30),
             ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 0, color: Color(0xFFF4B5A4)),
-              borderRadius: BorderRadius.all(Radius.circular(100)),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 0,
+                color: widget.borderColor ?? const Color(0xFFF4B5A4),
+              ),
+              borderRadius: BorderRadius.circular(30),
             ),
-            errorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 0, color: Color(0xFFF4B5A4)),
-              borderRadius: BorderRadius.all(Radius.circular(100)),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 1, color: Colors.red),
+              borderRadius: BorderRadius.circular(30),
             ),
-            focusedErrorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 0, color: Color(0xFFF4B5A4)),
-              borderRadius: BorderRadius.all(Radius.circular(100)),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 1, color: Colors.red),
+              borderRadius: BorderRadius.circular(30),
             ),
             hintText: widget.hintText,
-            hintStyle: const TextStyle(
-              color: Color(0xFFDCBEB6),
-            ),
+            hintStyle:
+                widget.hintStyle ??
+                const TextStyle(
+                  color: Color(0xFFDCBEB6),
+                  fontSize: 16,
+                ),
           ),
           validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Please enter ${widget.hintText}";
-            }
-            return null;
+            return widget.validator?.call(value) ??
+                (value == null || value.isEmpty
+                    ? 'Please enter ${widget.hintText}'
+                    : null);
           },
         ),
       ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:home_decor/main.dart';
-import 'package:home_decor/src/features/screens/home_screen.dart';
+
 import 'package:home_decor/src/features/screens/login_screen.dart';
 import 'package:home_decor/src/features/widgets/onboarding_page_content.dart';
 
