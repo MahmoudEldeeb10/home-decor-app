@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_decor/main_screen.dart';
 import 'package:home_decor/src/features/widgets/custom_textformfield.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -72,7 +73,12 @@ class LoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.pushNamed(context, '/HomeScreen');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MainScreen(),
+                        ),
+                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
