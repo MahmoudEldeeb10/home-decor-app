@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_decor/main_screen.dart';
+import 'package:home_decor/src/core/services/auth_service.dart';
+import 'package:home_decor/src/features/screens/auth/cubit/auth_cubit.dart';
 import 'package:home_decor/src/features/screens/auth/screens/forgot_password_screen.dart';
 import 'package:home_decor/src/features/screens/auth/screens/login_screen.dart';
 import 'package:home_decor/src/features/screens/card_screen.dart';
@@ -12,7 +15,12 @@ import 'package:home_decor/src/features/screens/auth/screens/signup_screen.dart'
 import 'l10n/l10n.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create: (context) => AuthCubit(AuthService()),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
