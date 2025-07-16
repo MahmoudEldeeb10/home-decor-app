@@ -68,9 +68,10 @@ class HomeScreen extends StatelessWidget {
                   color: Color(0xffF4B5A4),
                 ),
               ),
-
+              const SizedBox(height: 20),
               CategoryListWidget(),
               const SizedBox(height: 20),
+              //
               Text(
                 "Best Seller",
                 style: TextStyle(
@@ -94,6 +95,7 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
               SizedBox(height: 20),
+              //
               Text(
                 "New Collection",
                 style: TextStyle(
@@ -102,8 +104,8 @@ class HomeScreen extends StatelessWidget {
                   color: Color(0xffF4B5A4),
                 ),
               ),
-              SizedBox(height: 10),
 
+              // SizedBox(height: 20),
               FutureBuilder(
                 future: NewCollectionService.fetchNewCollection(),
                 builder: (context, snapshot) {

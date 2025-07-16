@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:home_decor/main_screen.dart';
-import 'package:home_decor/src/features/screens/auth/forgot_password_screen.dart';
-import 'package:home_decor/src/features/screens/auth/login_screen.dart';
+import 'package:home_decor/src/features/screens/auth/screens/forgot_password_screen.dart';
+import 'package:home_decor/src/features/screens/auth/screens/login_screen.dart';
 import 'package:home_decor/src/features/screens/card_screen.dart';
 import 'package:home_decor/src/features/screens/home_screen.dart';
 import 'package:home_decor/src/features/screens/list_screen.dart';
 import 'package:home_decor/src/features/screens/onboarding_screen.dart';
-import 'package:home_decor/src/features/screens/auth/set_password_screen.dart';
-import 'package:home_decor/src/features/screens/auth/signup_screen.dart';
+import 'package:home_decor/src/features/screens/auth/screens/set_password_screen.dart';
+import 'package:home_decor/src/features/screens/auth/screens/signup_screen.dart';
 
 import 'l10n/l10n.dart';
 
