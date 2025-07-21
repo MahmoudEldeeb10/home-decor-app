@@ -17,10 +17,26 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> register(String username, String email, String password) async {
+  Future<void> register(
+    String fullName,
+    String username,
+    String email,
+    String password,
+    String confirm_password,
+    String mobile,
+    String dateOfBirth,
+  ) async {
     emit(AuthLoading());
     try {
-      final token = await authService.register(username, email, password);
+      final token = await authService.register(
+        username,
+        email,
+        password,
+        confirm_password,
+        mobile,
+        dateOfBirth,
+        fullName,
+      );
       emit(AuthSuccess(token));
     } catch (e) {
       emit(AuthFailure(e.toString()));
@@ -31,7 +47,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       await authService.logout();
-      emit(AuthInitial()); // go back to login or splash state
+      emit(AuthInitial());
     } catch (e) {
       emit(AuthFailure('Logout failed: ${e.toString()}'));
     }

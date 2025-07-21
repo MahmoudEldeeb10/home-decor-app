@@ -8,8 +8,11 @@ class CreateAccountScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _mobileController = TextEditingController();
+  final _dobController = TextEditingController();
 
   CreateAccountScreen({super.key});
 
@@ -76,6 +79,45 @@ class CreateAccountScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     CustomTextformfield(
+                      upperlabel: 'User Name',
+                      hintText: 'Name',
+                      controller: _usernameController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your full name';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    CustomTextformfield(
+                      upperlabel: 'Mobile Number',
+                      hintText: '0123456789',
+                      controller: _mobileController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your mobile number';
+                        }
+                        if (!RegExp(r'^[0-9]{10,15}$').hasMatch(value)) {
+                          return 'Enter a valid mobile number';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    CustomTextformfield(
+                      upperlabel: 'Date of Birth',
+                      hintText: 'YYYY-MM-DD',
+                      controller: _dobController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your date of birth';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    CustomTextformfield(
                       upperlabel: 'Password',
                       hintText: '********',
                       controller: _passwordController,
@@ -128,8 +170,13 @@ class CreateAccountScreen extends StatelessWidget {
                                 if (_formKey.currentState!.validate()) {
                                   context.read<AuthCubit>().register(
                                     _fullNameController.text.trim(),
+
                                     _emailController.text.trim(),
                                     _passwordController.text.trim(),
+                                    _confirmPasswordController.text.trim(),
+                                    _mobileController.text.trim(),
+                                    _dobController.text.trim(),
+                                    _usernameController.text.trim(),
                                   );
                                 }
                               },

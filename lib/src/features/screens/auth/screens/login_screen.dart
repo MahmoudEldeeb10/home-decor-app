@@ -10,7 +10,7 @@ class LoginScreen extends StatelessWidget {
   final _passwordController = TextEditingController();
 
   LoginScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,119 +36,124 @@ class LoginScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Welcome\nPlease enter your details to proceed.',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  CustomTextformfield(
-                    upperlabel: 'Username Or Email',
-                    hintText: 'example@example.com',
-                    controller: _usernameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your username or email';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  CustomTextformfield(
-                    upperlabel: 'Password',
-                    hintText: '********',
-                    controller: _passwordController,
-                    isPassword: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  Align(
-                    alignment: Alignment.center,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/ForgotPassword');
-                      },
-                      child: const Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: Colors.black54),
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Welcome\nPlease enter your details to proceed.',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 32),
-                  Center(
-                    child: state is AuthLoading
-                        ? const CircularProgressIndicator()
-                        : ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                context.read<AuthCubit>().login(
-                                  _usernameController.text.trim(),
-                                  _passwordController.text.trim(),
-                                );
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFF4B5A4),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
+                    const SizedBox(height: 32),
+                    CustomTextformfield(
+                      upperlabel: 'Username Or Email',
+                      hintText: 'example@example.com',
+                      controller: _usernameController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your username or email';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    CustomTextformfield(
+                      upperlabel: 'Password',
+                      hintText: '********',
+                      controller: _passwordController,
+                      isPassword: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    Align(
+                      alignment: Alignment.center,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/ForgotPassword');
+                        },
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    Center(
+                      child: state is AuthLoading
+                          ? const CircularProgressIndicator()
+                          : ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  context.read<AuthCubit>().login(
+                                    _usernameController.text.trim(),
+                                    _passwordController.text.trim(),
+                                  );
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFFF4B5A4),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
                               ),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 40,
-                                vertical: 12,
-                              ),
-                              child: Text(
-                                'Log In',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Color(0xffCC7861),
-                                  fontWeight: FontWeight.bold,
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 40,
+                                  vertical: 12,
+                                ),
+                                child: Text(
+                                  'Log In',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color(0xffCC7861),
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.facebook),
+                        SizedBox(width: 16),
+                        Icon(Icons.g_mobiledata),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Don't have an account?"),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/CreateAccountScreen',
+                            );
+                          },
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle(color: Color(0xFFF4B5A4)),
                           ),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.facebook),
-                      SizedBox(width: 16),
-                      Icon(Icons.g_mobiledata),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Don't have an account?"),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/CreateAccountScreen');
-                        },
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(color: Color(0xFFF4B5A4)),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           );

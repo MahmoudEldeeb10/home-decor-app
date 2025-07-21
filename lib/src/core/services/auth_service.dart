@@ -34,23 +34,27 @@ class AuthService {
     }
   }
 
-  // ✅ REGISTER (signup)
   Future<String> register(
+    String fullName,
     String username,
     String email,
     String password,
+    String confirmPassword,
+    String mobileNumber,
+    String dateOfBirth,
   ) async {
     try {
       final response = await _dio.post(
         '$baseUrl/register/',
         data: {
+          'full_name': fullName,
           'username': username,
           'email': email,
           'password': password,
+          'confirm_password': confirmPassword,
+          'mobile_number': mobileNumber,
+          'date_of_birth': dateOfBirth,
         },
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-        ),
       );
 
       final token = response.data['access_token'];
@@ -59,11 +63,10 @@ class AuthService {
         key: 'refresh_token',
         value: response.data['refresh_token'],
       );
-
       return token;
     } on DioException catch (e) {
       print('❌ Register Error: ${e.response?.data}');
-      throw Exception('Registration failed: ${e.response?.data}');
+      throw Exception('Register failed: ${e.response?.data}');
     }
   }
 
